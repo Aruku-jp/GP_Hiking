@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 const backend = process.env.NEXT_PUBLIC_BACKEND_URL;
+import emailjs from "@emailjs/browser";
+import { Message } from "@mui/icons-material";
 
 // Comments
 
@@ -154,7 +156,7 @@ export class GeolocationMessageLike {
     this.update_date = update_date;
   }
 
-  static async getAllByID(messageID: number) {
+  static async getAllByID(messageID: number | null) {
     return await backendReq(`trails/messages/${messageID}/likes`, "get");
   }
 
@@ -175,6 +177,50 @@ export class GeolocationMessageLike {
       "put",
       updatedGeolocationMessageLike
     );
+  }
+}
+
+// Message Reports
+
+export class MessageReport {
+  from_user: number | undefined;
+  message_id: number | null;
+  reason: string;
+  date: string;
+  message: string;
+  resolved: boolean;
+
+  constructor(
+    from_user: number | undefined,
+    message_id: number | null,
+    reason: string,
+    date: string,
+    message: string,
+    resolved: boolean
+  ) {
+    this.from_user = from_user;
+    this.message_id = message_id;
+    this.reason = reason;
+    this.date = date;
+    this.message = message;
+    this.resolved = resolved;
+  }
+
+  static async create(newMessageReport: MessageReport) {
+    const serviceID: string = process.env.NEXT_PUBLIC_SERVICE_ID!;
+    const templateID: string = process.env.NEXT_PUBLIC_TEMPLATE_ID!;
+    const publicKey: string = process.env.NEXT_PUBLIC_KEY!;
+
+    emailjs
+      .send(serviceID, templateID, { ...newMessageReport }, publicKey)
+      .then(
+        (response) => {
+          console.log(response.status, response.text);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
   }
 }
 

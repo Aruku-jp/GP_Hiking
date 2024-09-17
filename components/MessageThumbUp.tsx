@@ -1,7 +1,6 @@
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { IconButton } from "@mui/material";
-import axios from "axios";
 import { GeolocationMessageLike } from "../src/APIFunctions";
 
 interface MessageThumbUpProps {

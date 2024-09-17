@@ -12,6 +12,7 @@
     "@devexpress/dx-react-chart": "^4.0.0",
     "@devexpress/dx-react-chart-material-ui": "^4.0.0",
     "@devexpress/dx-react-core": "^4.0.0",
+    "@emailjs/browser": "^3.10.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",

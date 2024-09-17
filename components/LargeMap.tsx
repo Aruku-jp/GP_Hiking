@@ -7,7 +7,6 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState, useCallback } from "react";
-import axios from "axios";
 import L from "leaflet";
 import styles from "../styles/mapview.module.css";
 import MessageIcon from "./MessageIcon";
